@@ -38,6 +38,13 @@ func TestOriginValidator(t *testing.T) {
 		// Other ports denied
 		{"http://localhost", false},
 		{"http://localhost:1234", false},
+
+		{"http://192.168.0.55", true},
+		{"http://192.168.0.55:80", true},
+		{"http://192.168.0.143:5999", true},
+		{"http://192.168.0.143:8999", true},
+		{"https://test.bishangex.com", true},
+		{"https://test.btc.so:899", true},
 	}
 	validator, err := corsValidator()
 	if err != nil {

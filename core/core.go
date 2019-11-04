@@ -13,8 +13,8 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/trezor/trezord-go/memorywriter"
-	"github.com/trezor/trezord-go/wire"
+	"github.com/bytefly/trezord-go/memorywriter"
+	"github.com/bytefly/trezord-go/wire"
 )
 
 // Package with "core logic" of device listing

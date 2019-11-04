@@ -10,10 +10,10 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/trezor/trezord-go/core"
-	"github.com/trezor/trezord-go/memorywriter"
-	"github.com/trezor/trezord-go/server"
-	"github.com/trezor/trezord-go/usb"
+	"github.com/bytefly/trezord-go/core"
+	"github.com/bytefly/trezord-go/memorywriter"
+	"github.com/bytefly/trezord-go/server"
+	"github.com/bytefly/trezord-go/usb"
 	"gopkg.in/natefinch/lumberjack.v2"
 )
 

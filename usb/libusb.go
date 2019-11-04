@@ -7,10 +7,10 @@ import (
 	"sync"
 	"sync/atomic"
 
-	lowlevel "github.com/trezor/trezord-go/usb/lowlevel/libusb"
+	lowlevel "github.com/bytefly/trezord-go/usb/lowlevel/libusb"
 
-	"github.com/trezor/trezord-go/core"
-	"github.com/trezor/trezord-go/memorywriter"
+	"github.com/bytefly/trezord-go/core"
+	"github.com/bytefly/trezord-go/memorywriter"
 )
 
 const (

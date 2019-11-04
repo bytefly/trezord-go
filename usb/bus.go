@@ -3,7 +3,7 @@ package usb
 import (
 	"errors"
 
-	"github.com/trezor/trezord-go/core"
+	"github.com/bytefly/trezord-go/core"
 )
 
 type USB struct {

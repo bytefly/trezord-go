@@ -1,6 +1,6 @@
 # trezord-go
 
-[![Build Status](https://travis-ci.org/trezor/trezord-go.svg?branch=master)](https://travis-ci.org/trezor/trezord-go) [![gitter](https://badges.gitter.im/trezor/community.svg)](https://gitter.im/trezor/community) [![Go Report Card](https://goreportcard.com/badge/trezor/trezord-go)](https://goreportcard.com/report/trezor/trezord-go)
+[![Build Status](https://travis-ci.org/bytefly/trezord-go.svg?branch=master)](https://travis-ci.org/bytefly/trezord-go) [![gitter](https://badges.gitter.im/bytefly/community.svg)](https://gitter.im/bytefly/community) [![Go Report Card](https://goreportcard.com/badge/bytefly/trezord-go)](https://goreportcard.com/report/bytefly/trezord-go)
 
 Trezor Communication Daemon aka Trezor Bridge (written in Go)
 
@@ -13,19 +13,19 @@ status: [spec](https://w3c.github.io/webappsec-secure-contexts/#is-origin-trustw
 trezord-go requires go >= 1.6
 
 ```
-go get github.com/trezor/trezord-go
-go build github.com/trezor/trezord-go
+go get github.com/bytefly/trezord-go
+go build github.com/bytefly/trezord-go
 ./trezord-go -h
 ```
 
 ## Update from source
 ```
 go clean
-go get -u github.com/trezor/trezord-go
-go build -a github.com/trezor/trezord-go
+go get -u github.com/bytefly/trezord-go
+go build -a github.com/bytefly/trezord-go
 ```
 
-On Linux don't forget to install the [udev rules](https://github.com/trezor/trezor-common/blob/master/udev/51-trezor.rules) if you are running from source and not using pre-built packages.
+On Linux don't forget to install the [udev rules](https://github.com/bytefly/trezor-common/blob/master/udev/51-trezor.rules) if you are running from source and not using pre-built packages.
 
 ## Guide to compiling packages
 
@@ -82,7 +82,7 @@ Server supports following API calls:
 | `/listen` <br> POST | request body: previous, as JSON | like `enumerate` | Listen to changes and returns either on change or after 30 second timeout. Compares change from `previous` that is sent as a parameter. "Change" is both connecting/disconnecting and session change. |
 | `/acquire/PATH/PREVIOUS` <br> POST | `PATH`: path of device<br>`PREVIOUS`: previous session (or string "null") | {`session`:&nbsp;string} | Acquires the device at `PATH`. By "acquiring" the device, you are claiming the device for yourself.<br>Before acquiring, checks that the current session is `PREVIOUS`.<br>If two applications call `acquire` on a newly connected device at the same time, only one of them succeed. |
 | `/release/SESSION`<br>POST | `SESSION`: session to release | {} | Releases the device with the given session.<br>By "releasing" the device, you claim that you don't want to use the device anymore. |
-| `/call/SESSION`<br>POST | `SESSION`: session to call<br><br>request body: hexadecimal string | hexadecimal string | Both input and output are hexadecimal, encoded in following way:<br>first 2 bytes (4 characters in the hexadecimal) is the message type<br>next 4 bytes (8 in hex) is length of the data<br>the rest is the actual encoded protobuf data.<br>Protobuf messages are defined in [this protobuf file](https://github.com/trezor/trezor-common/blob/master/protob/messages.proto) and the app, calling trezord, should encode/decode it itself. |
+| `/call/SESSION`<br>POST | `SESSION`: session to call<br><br>request body: hexadecimal string | hexadecimal string | Both input and output are hexadecimal, encoded in following way:<br>first 2 bytes (4 characters in the hexadecimal) is the message type<br>next 4 bytes (8 in hex) is length of the data<br>the rest is the actual encoded protobuf data.<br>Protobuf messages are defined in [this protobuf file](https://github.com/bytefly/trezor-common/blob/master/protob/messages.proto) and the app, calling trezord, should encode/decode it itself. |
 | `/post/SESSION`<br>POST | `SESSION`: session to call<br><br>request body: hexadecimal string | 0 | Similar to `call`, just doesn't read response back. Usable mainly for debug link. |
 | `/read/SESSION`<br>POST | `SESSION`: session to call | 0 | Similar to `call`, just doesn't post, only reads. Usable mainly for debug link. |
 

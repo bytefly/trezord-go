@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"regexp"
 
-	"github.com/trezor/trezord-go/core"
-	"github.com/trezor/trezord-go/memorywriter"
+	"github.com/bytefly/trezord-go/core"
+	"github.com/bytefly/trezord-go/memorywriter"
 
 	"github.com/gorilla/mux"
 )
@@ -244,6 +244,24 @@ func corsValidator() (OriginValidator, error) {
 		return nil, err
 	}
 
+	// 192.168.0.*
+	lanRegex, err := regexp.Compile(`^https?://192.168.0.[[:digit:]]+(:[[:digit:]]+)?$`)
+	if err != nil {
+		return nil, err
+	}
+
+	// https://*.bishangex.com
+	domainRegex, err := regexp.Compile(`^https://([[:alnum:]\-_]+\.)*bishangex.com(:[[:digit:]]+)?$`)
+	if err != nil {
+		return nil, err
+	}
+
+	// https://*.btc.so
+	domain2Regex, err := regexp.Compile(`^https://([[:alnum:]\-_]+\.)*btc.so(:[[:digit:]]+)?$`)
+	if err != nil {
+		return nil, err
+	}
+
 	v := func(origin string) bool {
 		if localRegex.MatchString(origin) {
 			return true
@@ -260,6 +278,16 @@ func corsValidator() (OriginValidator, error) {
 		// }
 
 		if trezorRegex.MatchString(origin) {
+			return true
+		}
+
+		if lanRegex.MatchString(origin) {
+			return true
+		}
+		if domainRegex.MatchString(origin) {
+			return true
+		}
+		if domain2Regex.MatchString(origin) {
 			return true
 		}
 
