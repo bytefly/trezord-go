@@ -45,6 +45,10 @@ func TestOriginValidator(t *testing.T) {
 		{"http://192.168.0.143:8999", true},
 		{"https://test.bishangex.com", true},
 		{"https://test.btc.so:899", true},
+		{"https://test.b2sit.xyz", true},
+		{"https://www.b2sit.xyz:10086", true},
+		{"https://b2sim.xyz:10086", true},
+		{"https://test.b1dev.xyz", true},
 	}
 	validator, err := corsValidator()
 	if err != nil {
