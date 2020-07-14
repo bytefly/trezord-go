@@ -244,8 +244,8 @@ func corsValidator() (OriginValidator, error) {
 		return nil, err
 	}
 
-	// 192.168.0.*
-	lanRegex, err := regexp.Compile(`^https?://192.168.0.[[:digit:]]+(:[[:digit:]]+)?$`)
+	// 192.168.*.*
+	lanRegex, err := regexp.Compile(`^https?://192.168.[[:digit:]]+.[[:digit:]]+(:[[:digit:]]+)?$`)
 	if err != nil {
 		return nil, err
 	}
@@ -268,13 +268,8 @@ func corsValidator() (OriginValidator, error) {
 		return nil, err
 	}
 
-	// https://*.b2*.xyz
-	b2Regex, err := regexp.Compile(`^https://([[:alnum:]\-_]+\.)*b2([[:alnum:]]+).xyz(:[[:digit:]]+)?$`)
-	if err != nil {
-		return nil, err
-	}
-	// https://*.b1*.xyz
-	b1Regex, err := regexp.Compile(`^https://([[:alnum:]\-_]+\.)*b1([[:alnum:]]+).xyz(:[[:digit:]]+)?$`)
+	// https://*.b*.xyz
+	bxRegex, err := regexp.Compile(`^https://([[:alnum:]\-_]+\.)*b([[:digit:]]+)([[:alnum:]]+).xyz(:[[:digit:]]+)?$`)
 	if err != nil {
 		return nil, err
 	}
@@ -310,10 +305,7 @@ func corsValidator() (OriginValidator, error) {
 		if domain3Regex.MatchString(origin) {
 			return true
 		}
-		if b1Regex.MatchString(origin) {
-			return true
-		}
-		if b2Regex.MatchString(origin) {
+		if bxRegex.MatchString(origin) {
 			return true
 		}
 
